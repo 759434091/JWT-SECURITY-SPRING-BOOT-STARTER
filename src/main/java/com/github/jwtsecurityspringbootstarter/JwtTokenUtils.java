@@ -12,17 +12,19 @@ public class JwtTokenUtils {
 
 
     public JwtTokenUtils(String issuer, String stringKey) {
-        new JwtTokenUtils(issuer, SignatureAlgorithm.HS512, stringKey);
+        this(issuer, SignatureAlgorithm.HS512, stringKey);
     }
 
     public JwtTokenUtils(String issuer, SignatureAlgorithm signatureAlgorithm, String stringKey) {
         byte[] encodedKey = Base64.getEncoder().encode(stringKey.getBytes());
         SecretKeySpec secretKeySpec = new SecretKeySpec(encodedKey, 0, encodedKey.length, "AES");
-        new JwtTokenUtils(issuer, signatureAlgorithm, secretKeySpec);
+        this.issuer = issuer;
+        this.signatureAlgorithm = signatureAlgorithm;
+        this.key = secretKeySpec;
     }
 
     public JwtTokenUtils(String issuer, SecretKeySpec key) {
-        new JwtTokenUtils(issuer, SignatureAlgorithm.HS512, key);
+        this(issuer, SignatureAlgorithm.HS512, key);
     }
 
     public JwtTokenUtils(String issuer, SignatureAlgorithm signatureAlgorithm, SecretKeySpec key) {

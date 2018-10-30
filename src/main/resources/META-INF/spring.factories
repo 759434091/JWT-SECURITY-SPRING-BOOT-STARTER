@@ -1,1 +1,3 @@
-org.springframework.boot.autoconfigure.EnableAutoConfiguration=com.github.jwtsecurityspringbootstarter.JwtConfigurer
+org.springframework.boot.autoconfigure.EnableAutoConfiguration= \
+  com.github.jwtsecurityspringbootstarter.config.JwtConfigurerAdapter,\
+  com.github.jwtsecurityspringbootstarter.config.MvcConfig

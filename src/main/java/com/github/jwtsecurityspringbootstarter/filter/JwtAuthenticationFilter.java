@@ -1,7 +1,7 @@
 package com.github.jwtsecurityspringbootstarter.filter;
 
 import com.github.jwtsecurityspringbootstarter.JwtTokenUtils;
-import com.github.jwtsecurityspringbootstarter.config.JwtUserFactory;
+import com.github.jwtsecurityspringbootstarter.entity.JwtUserFactory;
 import com.github.jwtsecurityspringbootstarter.entity.JwtAuthenticationToken;
 import com.github.jwtsecurityspringbootstarter.entity.JwtUser;
 import io.jsonwebtoken.Claims;
@@ -11,10 +11,8 @@ import io.jsonwebtoken.SignatureException;
 import org.springframework.lang.NonNull;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
-import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
-import javax.annotation.Resource;
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -24,12 +22,18 @@ import java.io.IOException;
 /**
  * @author a9043
  */
-@Component
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
-    @Resource
     private JwtTokenUtils jwtTokenUtils;
-    @Resource
     private JwtUserFactory jwtUserFactory;
+
+    private JwtAuthenticationFilter() {
+    }
+
+    public JwtAuthenticationFilter(JwtTokenUtils jwtTokenUtils, JwtUserFactory jwtUserFactory) {
+        this.jwtTokenUtils = jwtTokenUtils;
+        this.jwtUserFactory = jwtUserFactory;
+    }
+
 
     @Override
     protected void doFilterInternal(@NonNull HttpServletRequest request,
