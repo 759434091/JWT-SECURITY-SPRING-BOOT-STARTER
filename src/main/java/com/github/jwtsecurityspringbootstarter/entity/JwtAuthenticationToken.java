@@ -5,13 +5,13 @@ import org.springframework.security.core.GrantedAuthority;
 
 import java.util.Collection;
 
-public class JwtAuthenticationToken<T> extends AbstractAuthenticationToken {
-    private T t;
+public class JwtAuthenticationToken extends AbstractAuthenticationToken {
+    private JwtUser jwtUser;
 
-    public JwtAuthenticationToken(T t,
+    public JwtAuthenticationToken(JwtUser jwtUser,
                                   Collection<? extends GrantedAuthority> authorities) {
         this(authorities);
-        this.t = t;
+        this.jwtUser = jwtUser;
     }
 
     /**
@@ -27,15 +27,15 @@ public class JwtAuthenticationToken<T> extends AbstractAuthenticationToken {
 
     @Override
     public Object getCredentials() {
-        return t;
+        return jwtUser;
     }
 
     @Override
     public Object getPrincipal() {
-        return null;
+        return jwtUser.getPrincipal();
     }
 
-    public T getUser() {
-        return t;
+    public JwtUser getUser() {
+        return jwtUser;
     }
 }

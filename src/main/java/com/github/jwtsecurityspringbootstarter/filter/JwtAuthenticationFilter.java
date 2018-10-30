@@ -1,6 +1,8 @@
 package com.github.jwtsecurityspringbootstarter.filter;
 
 import com.github.jwtsecurityspringbootstarter.JwtTokenUtils;
+import com.github.jwtsecurityspringbootstarter.config.JwtUserFactory;
+import com.github.jwtsecurityspringbootstarter.entity.JwtAuthenticationToken;
 import com.github.jwtsecurityspringbootstarter.entity.JwtUser;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
@@ -11,9 +13,6 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
-import team.a9043.yiluwiki.entity.YwUser;
-import team.a9043.yiluwiki.security.entity.YwAuthenticationToken;
-import team.a9043.yiluwiki.util.JwtUtil;
 
 import javax.annotation.Resource;
 import javax.servlet.FilterChain;
@@ -29,6 +28,8 @@ import java.io.IOException;
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
     @Resource
     private JwtTokenUtils jwtTokenUtils;
+    @Resource
+    private JwtUserFactory jwtUserFactory;
 
     @Override
     protected void doFilterInternal(@NonNull HttpServletRequest request,
@@ -53,7 +54,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         //解析token
         try {
             claims = jwtTokenUtils.getClaims(token);
-            jwtUser.
+            jwtUser = jwtUserFactory.init(claims);
 
         } catch (MalformedJwtException | SignatureException | ExpiredJwtException e) {
             SecurityContextHolder.clearContext();
@@ -62,8 +63,8 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         }
 
         //设定Authentication
-        YwAuthenticationToken ywAuthenticationToken =
-                new YwAuthenticationToken(ywUser, null);
+        JwtAuthenticationToken ywAuthenticationToken =
+                new JwtAuthenticationToken(jwtUser, null);
         ywAuthenticationToken
                 .setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
         ywAuthenticationToken.setAuthenticated(true);
