@@ -6,7 +6,7 @@
 添加到POM依赖
 ````
 <dependency>
-    <groupId>com.github</groupId>
+    <groupId>com.github.759434091</groupId>
     <artifactId>jwt-security-spring-boot-starter</artifactId>
     <version>1.0.0</version>
 </dependency>
