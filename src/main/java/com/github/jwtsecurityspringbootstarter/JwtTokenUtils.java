@@ -33,8 +33,24 @@ public class JwtTokenUtils {
         this.key = key;
     }
 
-    public String createJWT(JwtBuilder jwtBuilder) {
-        return jwtBuilder.compact();
+    public JwtTokenUtils(String stringKey) {
+        this(SignatureAlgorithm.HS512, stringKey);
+    }
+
+    public JwtTokenUtils(SignatureAlgorithm signatureAlgorithm, String stringKey) {
+        byte[] encodedKey = Base64.getEncoder().encode(stringKey.getBytes());
+        SecretKeySpec secretKeySpec = new SecretKeySpec(encodedKey, 0, encodedKey.length, "AES");
+        this.signatureAlgorithm = signatureAlgorithm;
+        this.key = secretKeySpec;
+    }
+
+    public JwtTokenUtils(SecretKeySpec key) {
+        this(SignatureAlgorithm.HS512, key);
+    }
+
+    public JwtTokenUtils(SignatureAlgorithm signatureAlgorithm, SecretKeySpec key) {
+        this.signatureAlgorithm = signatureAlgorithm;
+        this.key = key;
     }
 
     /**

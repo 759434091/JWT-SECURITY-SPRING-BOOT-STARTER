@@ -8,9 +8,8 @@ import java.util.Collection;
 public class JwtAuthenticationToken extends AbstractAuthenticationToken {
     private JwtUser jwtUser;
 
-    public JwtAuthenticationToken(JwtUser jwtUser,
-                                  Collection<? extends GrantedAuthority> authorities) {
-        this(authorities);
+    public JwtAuthenticationToken(JwtUser jwtUser) {
+        this(jwtUser.getGrantedAuthorities());
         this.jwtUser = jwtUser;
     }
 
