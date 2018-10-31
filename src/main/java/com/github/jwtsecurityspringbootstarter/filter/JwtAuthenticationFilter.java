@@ -68,7 +68,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
         //设定Authentication
         JwtAuthenticationToken ywAuthenticationToken =
-                new JwtAuthenticationToken(jwtUser, null);
+                new JwtAuthenticationToken(jwtUser);
         ywAuthenticationToken
                 .setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
         ywAuthenticationToken.setAuthenticated(true);
