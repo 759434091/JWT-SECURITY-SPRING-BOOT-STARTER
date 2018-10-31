@@ -13,6 +13,12 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
+/**
+ * 自动配置
+ * 若不存在WebSecurityConfigurerAdapter Bean则自动配置该文件
+ *
+ * @author a9043
+ */
 @Configuration
 @ConditionalOnMissingBean(WebSecurityConfigurerAdapter.class)
 public class JwtConfigurerAdapter extends WebSecurityConfigurerAdapter {

@@ -5,9 +5,16 @@ import io.jsonwebtoken.*;
 import javax.crypto.spec.SecretKeySpec;
 import java.util.*;
 
+/**
+ * 生成和解析Jwt Token的工具包
+ *
+ * @author a9043
+ */
 public class JwtTokenUtils {
     private SignatureAlgorithm signatureAlgorithm;
+    //签发密钥
     private SecretKeySpec key;
+    //签发者
     private String issuer;
 
 

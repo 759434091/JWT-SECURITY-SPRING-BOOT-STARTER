@@ -8,6 +8,14 @@ import org.springframework.security.config.annotation.web.configurers.AbstractHt
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 
+/**
+ * 手动配置方式
+ * <pre>
+ * http.apply(new JwtConfigurer(jwtTokenUtils, jwtUserFactory));
+ *
+ * @param <T>
+ * @author a9043
+ */
 public class JwtConfigurer<T extends HttpSecurityBuilder<T>> extends AbstractHttpConfigurer<JwtConfigurer<T>, T> {
     private JwtAuthenticationFilter jwtAuthenticationFilter;
 

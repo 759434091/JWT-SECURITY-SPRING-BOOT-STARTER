@@ -4,6 +4,9 @@ import org.springframework.security.core.GrantedAuthority;
 
 import java.util.Collection;
 
+/**
+ * @author a9043
+ */
 public interface JwtUser {
     Object getPrincipal();
 

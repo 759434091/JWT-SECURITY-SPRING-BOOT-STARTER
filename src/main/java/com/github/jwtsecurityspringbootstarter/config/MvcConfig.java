@@ -7,6 +7,11 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import java.util.List;
 
+/**
+ * MVC参数注入
+ *
+ * @author a9043
+ */
 @Configuration
 public class MvcConfig implements WebMvcConfigurer {
     @Override
