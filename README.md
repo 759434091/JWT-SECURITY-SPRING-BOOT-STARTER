@@ -44,6 +44,7 @@ http
 
 请自定义验证策略，例如用户名密码验证，可以配合Spring Security的其他安全策略进行验证，又或者自定义验证`Controller`。    
 验证成功之后，自行决定Token需要携带的`Claims`，通过调用如下方法生成Token并返回给前端。
+其中expireField和expireAmount为Calendar类型的参数
 ```
 jwtTokenUtils.createJWT(Map<String, Object> claims, int expireField, int expireAmount)
 ```

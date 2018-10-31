@@ -64,8 +64,8 @@ public class JwtTokenUtils {
      * Create Token
      *
      * @param claims       声明
-     * @param expireField  时间位
-     * @param expireAmount 时间长
+     * @param expireField  时间位 Calendar
+     * @param expireAmount 时间长 Calendar
      * @return token
      */
     public String createJWT(Map<String, Object> claims, int expireField, int expireAmount) {
